@@ -56,4 +56,7 @@ Homestead.json
 .env.production
 .phpactor.json
 auth.json
+# SQLite database (local data, not for git)
+/database/database.sqlite
+/database/database.sqlite-journal
 

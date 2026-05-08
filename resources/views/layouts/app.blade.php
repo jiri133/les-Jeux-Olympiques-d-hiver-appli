@@ -4,17 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Winter Olympics 2026')</title>
-   
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
- <style>
-        body {
-        font-family: 'Georgia', 'Times New Roman', serif;        
-       }
-    </style>
-
 </head>
-
 <body class="d-flex flex-column min-vh-100">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -43,11 +36,25 @@
                 </ul>
 
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/login') }}">
-                            <i class="bi bi-person-circle"></i> Organizer Login
-                        </a>
-                    </li>
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/organizer/dashboard') }}">
+                                <i class="bi bi-person-circle"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                @csrf
+                                <button type="submit" class="nav-link btn btn-link">Logout</button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/login') }}">
+                                <i class="bi bi-person-circle"></i> Organizer Login
+                            </a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>

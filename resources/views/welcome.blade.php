@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Home — Winter Olympics 2026')
+@section('title', 'Dashboard — Winter Olympics 2026')
 
 @section('content')
     <div class="text-center py-5">

@@ -4,6 +4,11 @@
 
 @section('content')
     <h1 class="mb-4">Your Cart</h1>
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 
     @if(count($rounds) === 0)
         <p>Your cart is empty. <a href="/tickets">Browse tickets</a></p>

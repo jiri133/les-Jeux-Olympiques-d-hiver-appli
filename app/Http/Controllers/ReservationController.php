@@ -30,6 +30,19 @@ class ReservationController extends Controller
     {
         $cart = session('cart', []);
 
+        foreach ($cart as $roundId => $quantity) {
+            $round = Round::with('venue', 'sport')->find($roundId);
+            $alreadySold = $round->spectators()->count();
+            $available = $round->venue->capacity - $alreadySold;
+
+            if ($quantity > $available) {
+                return redirect('/cart')->with('error',
+                    'Not enough seats for ' . $round->sport->name . ' - ' . $round->name .
+                    '. Only ' . $available . ' seats available.'
+                );
+            }
+        }
+
         $total = 0;
         foreach ($cart as $roundId => $quantity) {
             $round = Round::find($roundId);

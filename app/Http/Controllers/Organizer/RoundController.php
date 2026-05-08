@@ -3,63 +3,74 @@
 namespace App\Http\Controllers\Organizer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Round;
+use App\Models\Sport;
+use App\Models\Venue;
 use Illuminate\Http\Request;
 
 class RoundController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $rounds = Round::with('sport', 'venue')->orderBy('date')->get();
+        return view('organizer.rounds.index', ['rounds' => $rounds]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $sports = Sport::all();
+        $venues = Venue::all();
+        return view('organizer.rounds.create', ['sports' => $sports, 'venues' => $venues]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        Round::create([
+            'sport_id' => $request->sport_id,
+            'venue_id' => $request->venue_id,
+            'name' => $request->name,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'price' => $request->price,
+        ]);
+
+        return redirect()->route('organizer.rounds.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $round = Round::find($id);
+        $sports = Sport::all();
+        $venues = Venue::all();
+        return view('organizer.rounds.edit', [
+            'round' => $round,
+            'sports' => $sports,
+            'venues' => $venues,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $round = Round::find($id);
+        $round->update([
+            'sport_id' => $request->sport_id,
+            'venue_id' => $request->venue_id,
+            'name' => $request->name,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'price' => $request->price,
+        ]);
+
+        return redirect()->route('organizer.rounds.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $round = Round::find($id);
+        $round->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('organizer.rounds.index');
     }
 }

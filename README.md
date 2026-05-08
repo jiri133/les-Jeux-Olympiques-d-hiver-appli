@@ -4,7 +4,7 @@ Laravel project for the Programmation Web course.
 
 A ticket booking site for the 2026 Winter Olympics in Milano-Cortina. People can browse competitions, buy tickets, and organizers have a separate panel to manage everything.
 
-## Setup
+# Setup
 
 You need PHP 8.2+ and Composer.
 
@@ -23,7 +23,7 @@ php artisan serve
 
 Open http://127.0.0.1:8000
 
-## Organizer login
+# Organizer login
 
 organizer@jo.fr
 password

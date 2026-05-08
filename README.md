@@ -1,66 +1,33 @@
+# Winter Olympics 2026
 
-# Winter Olympics 2026 — Web Project
+Laravel project for the Programmation Web course.
 
-Laravel app for selling tickets to the Milano-Cortina 2026 Winter Olympics.
+A ticket booking site for the 2026 Winter Olympics in Milano-Cortina. People can browse competitions, buy tickets, and organizers have a separate panel to manage everything.
 
-Made for the Programmation Web course, 2026.
+## Setup
 
-## What it does
-
-- Browse the calendar of competitions
-- Buy tickets for one or more events
-- Organizers can log in and manage everything (add competitions, see reservations, stats)
-
-## Tech
-
-Laravel 13, PHP 8.2+, SQLite, Bootstrap 5 (via CDN), Laravel Breeze for auth.
-
-## How to run it
-
-You need PHP 8.2+ and Composer installed.
+You need PHP 8.2+ and Composer.
 
 git clone https://github.com/jiri133/les-Jeux-Olympiques-d-hiver-appli.git
 cd les-Jeux-Olympiques-d-hiver-appli
 composer install
-
-Copy `.env.example` to `.env` and run:
-
+cp .env.example .env
 php artisan key:generate
 
-In `.env`, make sure you have `DB_CONNECTION=sqlite`. Comment out the other DB lines.
-
-Create an empty file at `database/database.sqlite`. On Linux/Mac:
-
-touch database/database.sqlite
+Make sure .env has DB_CONNECTION=sqlite. Create the empty database file at database/database.sqlite (on Linux/Mac: touch database/database.sqlite).
 
 Then:
 
 php artisan migrate:fresh --seed
 php artisan serve
 
-Open http://127.0.0.1:8000.
+Open http://127.0.0.1:8000
 
-## Login for organizer
+## Organizer login
 
-Email: organizer@jo.fr
-Password: password
+organizer@jo.fr
+password
 
-Public registration is disabled — only organizers exist, created via seeder.
+## Made by
 
-## Database
-
-Six tables: users, sports, venues, rounds, reservations, spectators.
-
-The cart is stored in the session, not in the DB. Only confirmed reservations are saved.
-
-Each spectator has the same phone and email as the buyer (project requirement).
-
-## If something breaks
-
-Run `php artisan migrate:fresh --seed` to reset the database.
-
-If you get class not found errors, try `composer dump-autoload`.
-
-## Team
-
-Irina-Adelina Jiroveanu and [coleg's name]
+Irina-Adelina Jiroveanu 

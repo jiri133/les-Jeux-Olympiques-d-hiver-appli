@@ -23,9 +23,11 @@ Route::get('/checkout', [ReservationController::class, 'create'])->name('checkou
 Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 Route::get('/reservations/{id}/confirmation', [ReservationController::class, 'confirmation'])->name('reservations.confirmation');
 
-Route::prefix('organizer')->name('organizer.')->group(function () {
+Route::prefix('organizer')->name('organizer.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [OrganizerController::class, 'dashboard'])->name('dashboard');
     Route::get('/reservations', [OrganizerController::class, 'reservations'])->name('reservations');
     Route::get('/stats', [OrganizerController::class, 'stats'])->name('stats');
     Route::resource('rounds', RoundController::class);
 });
+
+require __DIR__.'/auth.php';

@@ -6,7 +6,13 @@
     <title>@yield('title', 'Winter Olympics 2026')</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+    body { font-family: 'Bebas Neue', sans-serif; }
+</style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 

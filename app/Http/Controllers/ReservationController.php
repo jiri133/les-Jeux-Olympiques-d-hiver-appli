@@ -10,6 +10,9 @@ class ReservationController extends Controller
 {
     public function create()
     {
+        if (empty(session('cart', []))) {
+        return redirect('/tickets')->with('error', 'Your cart is empty.');
+    }
         $cart = session('cart', []);
         $items = [];
         $total = 0;
@@ -28,6 +31,10 @@ class ReservationController extends Controller
 
     public function store(Request $request)
     {
+
+        if (empty(session('cart', []))) {
+        return redirect('/tickets')->with('error', 'Your cart is empty.');
+    }
         $cart = session('cart', []);
 
         foreach ($cart as $roundId => $quantity) {

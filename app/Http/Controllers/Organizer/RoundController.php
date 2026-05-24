@@ -24,41 +24,53 @@ class RoundController extends Controller
     }
 
     public function store(Request $request)
-{
-    Round::create([
-        'sport_id' => $request->sport_id,
-        'venue_id' => $request->venue_id,
-        'name' => $request->name,
-        'date' => $request->date,
-        'start_time' => $request->start_time,
-        'end_time' => $request->end_time,
-        'price' => $request->price,
-    ]);
+    {
+        Round::create([
+            'sport_id' => $request->sport_id,
+            'venue_id' => $request->venue_id,
+            'name' => $request->name,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'price' => $request->price,
+        ]);
 
-    return redirect()->route('organizer.rounds.index')->with('success', 'Competition created successfully!');
-}
+        return redirect()->route('organizer.rounds.index')->with('success', 'Competition created successfully!');
+    }
 
-public function update(Request $request, $id)
-{
-    $round = Round::find($id);
-    $round->update([
-        'sport_id' => $request->sport_id,
-        'venue_id' => $request->venue_id,
-        'name' => $request->name,
-        'date' => $request->date,
-        'start_time' => $request->start_time,
-        'end_time' => $request->end_time,
-        'price' => $request->price,
-    ]);
+    public function edit($id)
+    {
+        $round = Round::find($id);
+        $sports = Sport::all();
+        $venues = Venue::all();
+        return view('organizer.rounds.edit', [
+            'round' => $round,
+            'sports' => $sports,
+            'venues' => $venues,
+        ]);
+    }
 
-    return redirect()->route('organizer.rounds.index')->with('success', 'Competition updated successfully!');
-}
+    public function update(Request $request, $id)
+    {
+        $round = Round::find($id);
+        $round->update([
+            'sport_id' => $request->sport_id,
+            'venue_id' => $request->venue_id,
+            'name' => $request->name,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'price' => $request->price,
+        ]);
 
-public function destroy($id)
-{
-    $round = Round::find($id);
-    $round->delete();
+        return redirect()->route('organizer.rounds.index')->with('success', 'Competition updated successfully!');
+    }
 
-    return redirect()->route('organizer.rounds.index')->with('success', 'Competition deleted successfully!');
-}
+    public function destroy($id)
+    {
+        $round = Round::find($id);
+        $round->delete();
+
+        return redirect()->route('organizer.rounds.index')->with('success', 'Competition deleted successfully!');
+    }
 }
